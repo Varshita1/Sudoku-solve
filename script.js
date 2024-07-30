@@ -38,7 +38,7 @@ let SolvePuzzle = document.getElementById('SolvePuzzle')
 	//we can change the difficulty of the puzzle the allowed values of difficulty are easy, medium, hard and random
 	xhrRequest.send()
 
-}*/
+}
 GetPuzzle.onclick = function () {
     var xhrRequest = new XMLHttpRequest()
     xhrRequest.onload = function () {
@@ -50,6 +50,27 @@ GetPuzzle.onclick = function () {
     xhrRequest.open('get', 'https://cors-anywhere.herokuapp.com/https://sugoku.onrender.com/board?difficulty=easy')
     xhrRequest.send()
 }
+*/
+GetPuzzle.onclick = function () {
+    console.log("GetPuzzle button clicked");
+    var xhrRequest = new XMLHttpRequest();
+    xhrRequest.onload = function () {
+        if (xhrRequest.status >= 200 && xhrRequest.status < 300) {
+            var response = JSON.parse(xhrRequest.response);
+            console.log("Response received:", response);
+            board = response.board;
+            FillBoard(board);
+        } else {
+            console.error("Request failed with status:", xhrRequest.status);
+        }
+    };
+    xhrRequest.onerror = function () {
+        console.error("Request failed");
+    };
+    xhrRequest.open('get', 'https://cors-anywhere.herokuapp.com/https://sugoku.onrender.com/board?difficulty=easy');
+    xhrRequest.send();
+    console.log("Request sent");
+};
 
 SolvePuzzle.onclick = () => {
 	sudukoSolver(board, 0, 0, 9);
