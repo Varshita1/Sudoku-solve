@@ -26,7 +26,7 @@ function FillBoard(board) {
 let GetPuzzle = document.getElementById('GetPuzzle')
 let SolvePuzzle = document.getElementById('SolvePuzzle')
 
-GetPuzzle.onclick = function () {
+/*GetPuzzle.onclick = function () {
 	var xhrRequest = new XMLHttpRequest()
 	xhrRequest.onload = function () {
 		var response = JSON.parse(xhrRequest.response)
@@ -37,6 +37,18 @@ GetPuzzle.onclick = function () {
 	xhrRequest.open('get', 'https://sugoku.onrender.com/board?difficulty=easy')
 	//we can change the difficulty of the puzzle the allowed values of difficulty are easy, medium, hard and random
 	xhrRequest.send()
+
+}*/
+GetPuzzle.onclick = function () {
+    var xhrRequest = new XMLHttpRequest()
+    xhrRequest.onload = function () {
+        var response = JSON.parse(xhrRequest.response)
+        console.log(response)
+        board = response.board
+        FillBoard(board)
+    }
+    xhrRequest.open('get', 'https://cors-anywhere.herokuapp.com/https://sugoku.onrender.com/board?difficulty=easy')
+    xhrRequest.send()
 }
 
 SolvePuzzle.onclick = () => {
